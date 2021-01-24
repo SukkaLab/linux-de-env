@@ -8,7 +8,7 @@ echo -e "\033[33m System requirements: Debian 9+ \033[0m"
 echo -e "\033[33m https://github.com/SukkaLab/linux-de-env \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\n"
-sleep 2s
+sleep 1s
 
 clear
 echo -e "\n"
@@ -38,7 +38,7 @@ echo -e "\033[33m 88888888888888888888888888888888888888888888888888888888888888
 echo -e "\033[33m 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888 \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\n"
-sleep 2s
+sleep 1s
 
 clear
 echo -e "\n"
@@ -68,7 +68,7 @@ echo -e "\033[33m 88888888888888888888888888888888888888888888888888888888888888
 echo -e "\033[33m 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888 \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\n"
-sleep 2s
+sleep 1s
 
 echo -e "\n\n\n"
 clear
@@ -99,7 +99,7 @@ echo -e "\033[33m 88888888888888888888888888888888888888888888888888888888888888
 echo -e "\033[33m 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888 \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\n"
-sleep 2s
+sleep 1s
 
 echo -e "\n"
 clear
@@ -111,7 +111,6 @@ echo -e "\033[33m https://github.com/SukkaLab/linux-de-env \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo "from https://skk.moe - 2021/01/23 - SukkaW"
 echo "---------------------------------------------------------------------------------------------------------------------"
-echo Press any key to continue! Exit with 'Ctrl'+'C' !
 
 echo -e "\n"
 cd /root
@@ -123,17 +122,11 @@ swapon /var/swapd
 echo '/var/swapd   swap   swap   default 0 0' >> /etc/fstab
 apt-get update -y
 apt-get dist-upgrade -y
-apt-get install sudo curl wget patch -y
+apt-get install sudo curl wget patch git -y
 apt --fix-broken install -y
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\033[32m Swaps Memory is Created And Mirror Updated  is [OK] \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
-
-echo -e "\n"
-cd /root
-apt-get install apt-transport-https -y
-apt-get install x-window-system-core -y
-apt-get install mate-desktop-environment-extras locales vim -y
 
 echo -e "\n"
 cd /root
@@ -608,10 +601,10 @@ en_US.UTF-8 UTF-8
 # yi_US.UTF-8 UTF-8
 # yo_NG UTF-8
 # yue_HK UTF-8
-zh_CN GB2312
-zh_CN.GB18030 GB18030
-zh_CN.GBK GBK
-zh_CN.UTF-8 UTF-8
+# zh_CN GB2312
+# zh_CN.GB18030 GB18030
+# zh_CN.GBK GBK
+# zh_CN.UTF-8 UTF-8
 # zh_HK BIG5-HKSCS
 # zh_HK.UTF-8 UTF-8
 # zh_SG GB2312
@@ -625,13 +618,14 @@ zh_CN.UTF-8 UTF-8
 # en_US.UTF-8 UTF-8'>/etc/locale.gen
 
 locale-gen
-update-locale "LANG=zh_CN.UTF-8"
-locale-gen --purge "zh_CN.UTF-8"
+update-locale "LANG=en_US.UTF-8"
+locale-gen --purge "en_US.UTF-8"
 dpkg-reconfigure --frontend noninteractive locales
-localectl set-locale LANG=zh_CN.UTF-8
+localectl set-locale LANG=en_US.UTF-8
 apt-get install xfonts-intl-chinese xfonts-wqy -y
 apt-get install fontforge software-properties-common -y
 apt-get install ibus-libpinyin net-tools network-manager network-manager-gnome -y
+apt-get install ttf-liberation -y
 echo '[main]
 plugins=ifupdown,keyfile
 [ifupdown]
@@ -642,6 +636,18 @@ echo "--------------------------------------------------------------------------
 echo -e "\033[32m Desktop environment is installed  is [OK] \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 
+sudo wget -O /usr/share/fonts/mtextra.ttf https://raw.githubusercontent.com/MeowLove/Linux-Remote-Desktop-Environment/master/Download/Common/Fonts/TTF-Sys/mtextra.ttf
+sudo wget -O /usr/share/fonts/symbol.ttf https://raw.githubusercontent.com/MeowLove/Linux-Remote-Desktop-Environment/master/Download/Common/Fonts/TTF-Sys/symbol.ttf
+sudo wget -O /usr/share/fonts/WEBDINGS.TTF https://raw.githubusercontent.com/MeowLove/Linux-Remote-Desktop-Environment/master/Download/Common/Fonts/TTF-Sys/WEBDINGS.TTF
+sudo wget -O /usr/share/fonts/wingding.ttf https://raw.githubusercontent.com/MeowLove/Linux-Remote-Desktop-Environment/master/Download/Common/Fonts/TTF-Sys/wingding.ttf
+sudo wget -O /usr/share/fonts/WINGDNG2.ttf https://raw.githubusercontent.com/MeowLove/Linux-Remote-Desktop-Environment/master/Download/Common/Fonts/TTF-Sys/WINGDNG2.ttf
+sudo wget -O /usr/share/fonts/WINGDNG3.ttf https://raw.githubusercontent.com/MeowLove/Linux-Remote-Desktop-Environment/master/Download/Common/Fonts/TTF-Sys/WINGDNG3.ttf
+sudo wget -O /usr/share/fonts/msyh.ttf https://github.com/rockq-org/ubuntu-winfonts/raw/master/winfonts/msyh.ttf
+sudo wget -O /usr/share/fonts/msyhbd.ttf https://github.com/rockq-org/ubuntu-winfonts/raw/master/winfonts/msyhbd.ttf
+sudo mkfontscale
+sudo mkfontdir
+sudo fc-cache
+
 useradd -m RdpUser
 echo "skk.moe
 skk.moe
@@ -649,7 +655,7 @@ skk.moe
 
 apt-get install firefox-esr -y
 apt --fix-broken install -y
-apt-get install stretch-backports remmina remmina-plugin-rdp remmina-plugin-secret remmina-plugin-spice -y
+apt-get install remmina remmina-plugin-rdp remmina-plugin-secret remmina-plugin-spice -y
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\033[32m Remmina Firefox Already installed  is [OK] \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
@@ -701,8 +707,25 @@ touch /home/RdpUser/.Xclients
 echo "mate-session" > /home/RdpUser/.Xclients
 chmod a+x /home/RdpUser/.Xclients
 systemctl restart xrdp
+systemctl restart polkit
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\033[32m Remote connection RDP is installed  is [OK] \033[0m"
+echo "---------------------------------------------------------------------------------------------------------------------"
+echo -e "\n\n\n"
+sleep 3s
+
+cd /root
+
+git clone https://github.com/fail2ban/fail2ban.git
+cd fail2ban
+sudo python setup.py install
+
+cp files/debian-initd /etc/init.d/fail2ban
+update-rc.d fail2ban defaults
+service fail2ban start
+
+echo "---------------------------------------------------------------------------------------------------------------------"
+echo -e "\033[32m Fail2Ban is installed  is [OK] \033[0m"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\n\n\n"
 sleep 3s
@@ -711,7 +734,7 @@ clear
 echo -e "\n"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo "The current default system language is Chinese."
-echo "If you are an English user, please execute ' sudo localectl set-locale LANG=en_US.UTF-8 '"
+echo "If you are an English user, please execute ' sudo localectl set-locale LANG=zh_CN.UTF-8 '"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\033[33m Everything is ready and the system is restarting. Then you can connect via (RDP)IP:3389. \033[0m"
 echo "Normally, the [root] user is not recommended. The new user [RdpUser] has been created with the password [skk.moe]. Please change the default password as soon as possible after login."
