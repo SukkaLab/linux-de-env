@@ -653,6 +653,7 @@ echo "skk.moe
 skk.moe
 " | passwd RdpUser
 
+usermod -aG sudo RdpUser
 apt-get install firefox-esr -y
 apt --fix-broken install -y
 apt-get install remmina remmina-plugin-rdp remmina-plugin-secret remmina-plugin-spice -y
@@ -733,7 +734,7 @@ sleep 3s
 clear
 echo -e "\n"
 echo "---------------------------------------------------------------------------------------------------------------------"
-echo "The current default system language is Chinese."
+echo "The current default system language is English."
 echo "If you are an English user, please execute ' sudo localectl set-locale LANG=zh_CN.UTF-8 '"
 echo "---------------------------------------------------------------------------------------------------------------------"
 echo -e "\033[33m Everything is ready and the system is restarting. Then you can connect via (RDP)IP:3389. \033[0m"
